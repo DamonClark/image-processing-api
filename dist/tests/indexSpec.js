@@ -16,4 +16,9 @@ describe("Hello World Server", function () {
             expect(body).toBe("Hello, world!");
         });
     });
+    it('expect /api/images to return hello images', function () {
+        app.get('/api/images', function (req, res, body) {
+            expect(body).toBe("Hello Images");
+        });
+    });
 });

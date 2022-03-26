@@ -3,7 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = __importDefault(require("../index"));
-it('expect myFunc(5) to equal 25', function () {
-    expect((0, index_1.default)(5)).toEqual(25);
+var express_1 = __importDefault(require("express"));
+var app = (0, express_1.default)();
+describe("Hello World Server", function () {
+    it('expect /api to be status 200', function () {
+        app.get('/api', function (req, res) {
+            expect(res.statusCode).toBe(200);
+        });
+    });
+    it('expect /api to return hello world', function () {
+        app.get('/api', function (req, res, body) {
+            expect(body).toBe("Hello, world!");
+        });
+    });
 });

@@ -3,8 +3,13 @@ import imageProcess from '../../utilities/imageProcess';
 
 const images = express.Router();
 
-images.get('/', imageProcess, (req, res) => {
-    res.sendFile('/Users/damonclark/Desktop/Udacity/image-processing-api/assetts/thumb/fjord.jpeg');
+images.get('/', (req, res) => {
+    const filename = req.query.filename as string;
+    const width = req.query.width as string;
+    const height = req.query. height as string;
+    imageProcess(filename, width, height)
+    res.send(imageProcess.toString());
+      
 });
 
 export default images;

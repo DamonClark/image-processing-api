@@ -6,6 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var images = express_1.default.Router();
 images.get('/', function (req, res) {
-    res.send('Hello Images');
+    res.sendFile('/Users/damonclark/Desktop/Udacity/image-processing-api/assetts/full/fjord.jpeg');
 });
 exports.default = images;

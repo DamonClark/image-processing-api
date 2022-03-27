@@ -16,9 +16,9 @@ describe("Hello World Server", function () {
             expect(body).toBe("Hello, world!");
         });
     });
-    it('expect /api/images to return hello images', function () {
+    it('expect /api/images to return image', function () {
         app.get('/api/images', function (req, res, body) {
-            expect(body).toBe("Hello Images");
+            expect(body).toContain("/Users/damonclark/Desktop/Udacity/image-processing-api/assetts/full/fjord.jpeg");
         });
     });
 });

@@ -9,17 +9,15 @@ async function imageProcess(filename: string, width: string, height: string) {
 		console.log("no file exists")
 	} else {
 		const image = sharp(fullpath + filename + ".jpeg");
-		image
+		await image
 			.metadata()
 			.then(function() {
 				return image
 					.resize(Number(width), Number(height))
 					.webp()
-					.toBuffer();
+					.toFile(thumbpath + filename + '_thumb.jpeg');
 			})
-			.then(function() {
-				return image
-			});
+			return image
 	}
 }
 

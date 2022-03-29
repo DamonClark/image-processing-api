@@ -15,3 +15,5 @@ Then you can pass the api/images endpoint to the browser with the following para
 http://localhost:3000/api/images?filename=encenadaport&width=200&height=200
 
 Afterward you should see the resized image in the browser and a resized version of the image saved in `image-processing-api/assetts/thumb` directory
+
+Please Note: you must update the fullpath and thumbfile variables to match working directories from your computer.

@@ -15,10 +15,15 @@ describe("Hello World Server", function() {
     });
   });
 
-  it('expect /api/images to return image', () => {
-    app.get('/api/images', (req, res, body) => {
-      expect(body).toContain("/Users/damonclark/Desktop/Udacity/image-processing-api/assetts/full/fjord.jpeg");
+  it('expect /api/images to be status 200', () => {
+    app.get('/api/images', (req, res) => {
+      expect(res.statusCode).toBe(200);
     });
   });
 
+  it('expect image transform to not throw an error', () => {
+    app.get('/api/images?filename=encenadaport&width=400&height=400', (req, res) => {
+      expect(res.statusCode).toBe(200);
+    });
+  });
 });

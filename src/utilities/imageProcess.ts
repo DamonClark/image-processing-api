@@ -6,7 +6,7 @@ const thumbpath = '/Users/damonclark/Desktop/Udacity/image-processing-api/assett
 
 async function imageProcess(filename: string, width: string, height: string) {
 	if (fs.readdirSync(fullpath).length === 0) {
-		console.log("no file exists")
+		return console.log("no file exists")
 	} else {
 		const image = sharp(fullpath + filename + ".jpeg");
 		await image

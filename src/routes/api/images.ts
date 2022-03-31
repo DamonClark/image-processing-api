@@ -1,14 +1,13 @@
+import fs from "fs";
+import path from "path";
 import express from "express";
 import imageProcess from "../../utilities/imageProcess";
-import fs from "fs";
 
 const images = express.Router();
-const fullpath =
-  "/Users/damonclark/Desktop/Udacity/image-processing-api/assetts/full/";
-const thumbfile =
-  "/Users/damonclark/Desktop/Udacity/image-processing-api/assetts/thumb/";
+const fullpath = path.join(__dirname + "../../../../assetts/full/");
+const thumbpath = path.join(__dirname + "../../../../assetts/thumb/");
 
-images.get("/", (req, res) => {
+images.get("/", (req: express.Request, res: express.Response): void => {
   const filename = req.query.filename as string;
   const width = req.query.width as string;
   const height = req.query.height as string;
@@ -18,7 +17,7 @@ images.get("/", (req, res) => {
     imageProcess(filename, width, height).then(function () {
       const mimeType = "image/png"; // e.g., image/png
       res.contentType(mimeType);
-      res.sendFile(thumbfile + filename + "_thumb.jpeg");
+      res.sendFile(thumbpath + filename + "_thumb.jpeg");
     });
   }
 });

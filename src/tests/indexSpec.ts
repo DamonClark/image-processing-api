@@ -1,5 +1,7 @@
 import express from "express";
 const app = express();
+import imageProcess from "../utilities/imageProcess";
+
 
 describe("Hello World Server", function () {
   it("expect /api to be status 200", () => {
@@ -27,5 +29,11 @@ describe("Hello World Server", function () {
         expect(res.statusCode).toBe(200);
       }
     );
+  });
+
+  it("expect image transform to not throw an error", () => {
+    expect(async () => {
+      await imageProcess("encenadaport", "200", "200");
+    }).not.toThrow();
   });
 });

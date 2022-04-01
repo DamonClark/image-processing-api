@@ -11,13 +11,20 @@ images.get("/", (req: express.Request, res: express.Response): void => {
   const filename = req.query.filename as string;
   const width = req.query.width as string;
   const height = req.query.height as string;
+  const imagesize = width + "*" + height;
   if (fs.readdirSync(fullpath).length === 0) {
     res.send("No file found");
+  } else if (filename == "" || width == "" || height == "") {
+    res.send("Missing filename, height or width.");
+  } else if (filename.match(/^[a-zA-Z_-]+$/) == null) {
+    res.send("Invalid input for filename");
+  } else if (fs.readdirSync(thumbpath).toString().includes(imagesize)) {
+    res.send("image with same dimensions was resized earlier");
   } else {
     imageProcess(filename, width, height).then(function () {
       const mimeType = "image/png"; // e.g., image/png
       res.contentType(mimeType);
-      res.sendFile(thumbpath + filename + "_thumb.jpeg");
+      res.sendFile(thumbpath + filename + "_" + width + "*" + height + ".jpeg");
     });
   }
 });

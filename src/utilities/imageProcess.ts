@@ -18,7 +18,7 @@ async function imageProcess(
       return await image
         .resize(Number(width), Number(height))
         .webp()
-        .toFile(thumbpath + filename + "_thumb.jpeg");
+        .toFile(thumbpath + filename + "_" + width + "*" + height + ".jpeg");
     });
   }
 }

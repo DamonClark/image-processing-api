@@ -2,7 +2,6 @@ import express from "express";
 const app = express();
 import imageProcess from "../utilities/imageProcess";
 
-
 describe("Hello World Server", function () {
   it("expect /api to be status 200", () => {
     app.get("/api", (req, res) => {

@@ -7,18 +7,18 @@ const images = express.Router();
 const fullpath = path.join(__dirname + "../../../../assetts/full/");
 const thumbpath = path.join(__dirname + "../../../../assetts/thumb/");
 
-fs.mkdir(thumbpath, (err) => {
-  if (err) {
-    return console.error(err);
-  }
-  console.log("Directory created successfully!");
-});
-
 images.get("/", (req: express.Request, res: express.Response): void => {
   const filename = req.query.filename as string;
   const width = req.query.width as string;
   const height = req.query.height as string;
   const imagesize = width + "*" + height;
+  if (!fs.existsSync(thumbpath)) {
+    fs.mkdir(thumbpath, (err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });
+  }
   if (fs.readdirSync(fullpath).length === 0) {
     res.send("No file found");
   } else if (filename == "" || width == "" || height == "") {
@@ -30,7 +30,7 @@ images.get("/", (req: express.Request, res: express.Response): void => {
   } else {
     imageProcess(filename, width, height).then(function () {
       const mimeType = "image/png"; // e.g., image/png
-      res.contentType(mimeType);  
+      res.contentType(mimeType);
       res.sendFile(thumbpath + filename + "_" + width + "*" + height + ".jpeg");
     });
   }

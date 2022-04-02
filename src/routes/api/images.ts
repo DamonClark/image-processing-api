@@ -6,7 +6,6 @@ import imageProcess from "../../utilities/imageProcess";
 const images = express.Router();
 const fullpath = path.join(__dirname + "../../../../assetts/full/");
 const thumbpath = path.join(__dirname + "../../../../assetts/thumb/");
-
 images.get("/", (req: express.Request, res: express.Response): void => {
   const filename = req.query.filename as string;
   const width = req.query.width as string;
@@ -19,8 +18,13 @@ images.get("/", (req: express.Request, res: express.Response): void => {
       }
     });
   }
+  console.log(fs.readdirSync(fullpath).toString().includes(filename));
+  console.log(filename);
+
   if (fs.readdirSync(fullpath).length === 0) {
     res.send("No file found");
+  } else if (fs.readdirSync(fullpath).toString().includes(filename) == false) {
+    res.send("Filename assigned in the url doesn't exist in folder");
   } else if (filename == "" || width == "" || height == "") {
     res.send("Missing filename, height or width.");
   } else if (filename.match(/^[a-zA-Z_-]+$/) == null) {
